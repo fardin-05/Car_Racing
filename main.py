@@ -7,7 +7,7 @@ import sys
 def resource_path(relative_path):
     """Path Select for PyInstaller exe"""
     try:
-        # PyInstaller exe এ path
+        # PyInstaller exe path
         base_path = sys._MEIPASS
     except Exception:
         base_path = os.path.abspath(".")
