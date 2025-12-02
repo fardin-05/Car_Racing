@@ -5,7 +5,7 @@ import os
 import sys
 
 def resource_path(relative_path):
-    """ Path Select for PyInstaller exe"""
+    """Path Select for PyInstaller exe"""
     try:
         # PyInstaller exe এ path
         base_path = sys._MEIPASS
