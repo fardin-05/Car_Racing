@@ -12,7 +12,7 @@ def resource_path(relative_path):
     except Exception:
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
-# ---------- SETTINGS -----------
+# ---------- SETTINGS ------------
 WIDTH, HEIGHT = 480, 640
 FPS = 60
 
