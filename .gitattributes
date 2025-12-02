@@ -1,3 +1,7 @@
 *.html linguist-language=Python
 *.js   linguist-vendored
 *.css  linguist-vendored
+docs/** linguist-generated=true
+build/** linguist-generated=true
+dist/** linguist-generated=true
+*.html linguist-generated=true
