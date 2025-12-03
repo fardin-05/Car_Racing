@@ -12,7 +12,7 @@ def resource_path(relative_path):
     except Exception:
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
-# ---------- SETTINGS -----------
+# ---------- SETTINGS ------------
 WIDTH, HEIGHT = 480, 640
 FPS = 60
 
@@ -26,7 +26,7 @@ ENEMY_MAX_SPEED = 6
 SPAWN_EVENT = pygame.USEREVENT + 1
 SPAWN_INTERVAL_MS = 900  # initial spawn every 900 ms
 
-# ---------- INITIALIZE PYGAME ----------
+# ---------- INITIALIZE PYGAME -----------
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("TRAF Car Racing")
@@ -34,7 +34,7 @@ clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 32)
 large_font = pygame.font.SysFont(None, 64)
 
-# ---------- LOAD ASSETS ----------
+# ---------- LOAD ASSETS -----------
 def try_load(path, scale=None):
     """Try to load an image, scale if needed. Return None if fails."""
     try:
