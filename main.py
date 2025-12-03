@@ -12,7 +12,7 @@ def resource_path(relative_path):
     except Exception:
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
-# ---------- SETTINGS ------------
+# ---------- SETTINGS -----------
 WIDTH, HEIGHT = 480, 640
 FPS = 60
 
@@ -26,7 +26,7 @@ ENEMY_MAX_SPEED = 6
 SPAWN_EVENT = pygame.USEREVENT + 1
 SPAWN_INTERVAL_MS = 900  # initial spawn every 900 ms
 
-# ---------- INITIALIZE PYGAME -----------
+# ---------- INITIALIZE PYGAME ----------
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("TRAF Car Racing")
@@ -34,7 +34,7 @@ clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 32)
 large_font = pygame.font.SysFont(None, 64)
 
-# ---------- LOAD ASSETS -----------
+# ---------- LOAD ASSETS ----------
 def try_load(path, scale=None):
     """Try to load an image, scale if needed. Return None if fails."""
     try:
@@ -55,7 +55,7 @@ try:
 except Exception:
     road_img = None
 
-# ---------- GAME OBJECTS ----------
+# ---------- GAME OBJECTS ---------
 class Player:
     def __init__(self):
         self.width = PLAYER_WIDTH
@@ -95,7 +95,7 @@ class Enemy:
         else:
             pygame.draw.rect(surf, (220, 20, 60), self.rect)  # fallback red rect
 
-# ---------- HELPERS ----------
+# ---------- HELPERS ---------
 def draw_text(surf, text, size, x, y, center=False):
     if size == "large":
         text_surf = large_font.render(text, True, (255, 255, 255))
@@ -108,7 +108,7 @@ def draw_text(surf, text, size, x, y, center=False):
         rect.topleft = (x, y)
     surf.blit(text_surf, rect)
 
-# ---------- MAIN GAME FUNCTION ----------
+# ---------- MAIN GAME FUNCTION ---------
 def main():
     pygame.time.set_timer(SPAWN_EVENT, SPAWN_INTERVAL_MS)
     player = Player()
@@ -127,7 +127,7 @@ def main():
     while running:
         dt = clock.tick(FPS) / 16.0  # normalize movement
 
-        # ---------- EVENT LOOP ----------
+        # ---------- EVENT LOOP ---------
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -152,12 +152,12 @@ def main():
                 dx = 1
             player.move(dx)
 
-        # ---------- UPDATE ENEMIES ----------
+        # ---------- UPDATE ENEMIES -----------
         if not game_over:
             for e in enemies:
                 e.update(dt)
 
-        # ---------- REMOVE OFF-SCREEN ENEMIES ----------
+        # ---------- REMOVE OFF-SCREEN ENEMIES -----------
         remaining = []
         for e in enemies:
             if e.y > HEIGHT:
@@ -166,7 +166,7 @@ def main():
                 remaining.append(e)
         enemies = remaining
 
-        # ---------- COLLISION DETECTION ----------
+        # ---------- COLLISION DETECTION -----------
         if not game_over:
             for e in enemies:
                 if player.rect.colliderect(e.rect):
@@ -178,7 +178,7 @@ def main():
                         pass
                     break
 
-        # ---------- DIFFICULTY RAMP-UP ----------
+        # ---------- DIFFICULTY RAMP-UP -----------
         if not game_over:
             difficulty_timer += clock.get_time() / 1000.0
             if difficulty_timer > 5.0:
@@ -187,7 +187,7 @@ def main():
                 spawn_interval = max(300, int(spawn_interval * 0.92))
                 pygame.time.set_timer(SPAWN_EVENT, spawn_interval)
 
-        # ---------- DRAW ----------
+        # ---------- DRAW -----------
         # background scrolling
         if bg_img:
             bg_y += bg_speed
@@ -210,7 +210,7 @@ def main():
         for e in enemies:
             e.draw(screen)
 
-        # ---------- HUD ----------
+        # ---------- HUD -----------
         draw_text(screen, f"Score: {score}", "small", 10, 10)
         if game_over:
             draw_text(screen, "GAME OVER", "large", WIDTH // 2, HEIGHT // 2 - 30, center=True)
